@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Football Club API
+  description: |-
+    API for retrieving information about football clubs and their players.
+  contact:
+    email: your@email.here
+  license:
+    name: CC BY-NC 3.0
+    url: https://creativecommons.org/licenses/by-nc/3.0/
+  version: 1.0.0
+paths:
+  /clubs/{club_id}:
+    get:
+      summary: Get a football club by its ID
+      description: Retrieve information about a football club by its ID.
+      parameters:
+        - name: club_id
+          in: path
+          description: ID of the football club
+          example: 148
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Club'
+        '404':
+          description: Club not found
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      security:
+        - api_auth: []
+  /clubs:
+    get:
+      summary: Get all football clubs
+      description: Retrieve a list of football clubs with optional filtering by league and pagination.
+      parameters:
+        - name: page
+          in: query
+          example: 1
+          description: Index of the page (used for pagination)
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          example: 100
+          description: Number of clubs per page (used for pagination)
+          schema:
+            type: integer
+        - name: include_details
+          in: query
+          example: 1
+          description: Whether or not to include details of players (0 or 1)
+          schema:
+            type: integer
+        - name: league
+          in: query
+          example: GB1
+          description: Filter clubs by league (optional). For example GB1 = Premier League. For full list consult our documentation.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clubs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Club'
+                  next_page:
+                    type: integer
+                    example: 2
+                  last_page:
+                    type: integer
+                    example: 10
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      security:
+        - api_auth: []
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        player_id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Lionel Messi
+        position:
+          type: string
+          example: Forward
+        foot:
+          type: string
+          example: Left
+        market_value_in_eur:
+          type: number
+          format: float
+          example: 100000000
+    Club:
+      type: object
+      properties:
+        club_id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: FC Barcelona
+        competition:
+          type: integer
+          example: 1
+        league:
+          type: string
+          example: La Liga
+        stadium_name:
+          type: string
+          example: Camp Nou
+        total_club_value:
+          type: number
+          format: float
+          example: 1000000000
+        squad:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+  securitySchemes:
+    api_auth:
+      type: http
+      scheme: basic
+      description: Please authenticate to use the API

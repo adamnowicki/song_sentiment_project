@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: Song Sentiment API
+  description: |
+    API for retrieving information about songs, artists, and genres along with their sentiment scores.
+  contact:
+    email: your@email.com
+  license:
+    name: CC BY-NC 3.0
+    url: https://creativecommons.org/licenses/by-nc/3.0/
+  version: 1.0.0
+paths:
+  /artists/{artist}:
+    get:
+      summary: Get artist information and their songs' sentiment scores
+      description: |
+        Retrieves information about a specific artist and the sentiment scores of their songs.
+      parameters:
+        - name: artist
+          in: path
+          description: The name of the artist
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with artist information and sentiment scores
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  artist:
+                    type: string
+                    description: The name of the artist
+                  songs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          description: The title of the song
+                        positive_score:
+                          type: number
+                          description: The positive sentiment score of the song
+                        negative_score:
+                          type: number
+                          description: The negative sentiment score of the song
+                        neutral_score:
+                          type: number
+                          description: The neutral sentiment score of the song
+        '404':
+          description: Artist not found
+
+  /genres/{genre}:
+    get:
+      summary: Get genre information and songs with sentiment scores
+      description: |
+        Retrieves information about a specific genre and the songs within that genre along with their sentiment scores.
+      parameters:
+        - name: genre
+          in: path
+          description: The genre of the songs
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: The page number for pagination
+          schema:
+            type: integer
+            minimum: 1
+        - name: page_size
+          in: query
+          description: The number of items per page for pagination
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Successful response with genre information and paginated songs with sentiment scores
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  genre:
+                    type: object
+                    properties:
+                      tag:
+                        type: string
+                        description: The genre of the songs
+                      songs:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              description: The title of the song
+                            artist:
+                              type: string
+                              description: The name of the artist
+                            positive_score:
+                              type: number
+                              description: The positive sentiment score of the song
+                            negative_score:
+                              type: number
+                              description: The negative sentiment score of the song
+                            neutral_score:
+                              type: number
+                              description: The neutral sentiment score of the song
+                  next_page:
+                    type: string
+                    description: The URL for the next page of results
+                  last_page:
+                    type: string
+                    description: The URL for the last page of results
+        '404':
+          description: Genre not found
+components:
+  schemas:
+    Artist:
+      type: object
+      properties:
+        artist:
+          type: string
+          description: The name of the artist
+        songs:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                description: The title of the song
+              positive_score:
+                type: number
+                description: The positive sentiment score of the song
+              negative_score:
+                type: number
+                description: The negative sentiment score of the song
+              neutral_score:
+                type: number
+                description: The neutral sentiment score of the song
+    Genre:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: The genre of the songs
+        songs:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                description: The title of the song
+              artist:
+                type: string
+                description: The name of the artist
+              positive_score:
+                type: number
+                description: The positive sentiment score of the song
+              negative_score:
+                type: number
+                description: The negative sentiment score of the song
+              neutral_score:
+                type: number
+                description: The neutral sentiment score of the song
+  securitySchemes:
+    api_auth:
+      type: http
+      scheme: basic
+      description: Please authenticate to use the API
