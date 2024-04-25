@@ -14,9 +14,9 @@ import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-CLIENT_ID = "b0414cdb33ae4fa39aeca2d93b9557f8"
-CLIENT_SECRET = "4c64b853964b48f98f4c80ffc184e323"
-client_access_token = 'g2sJSzvVjvg1Rm0VAp2ieB1zYVas9BCGZ4VRyZff1dfSXX7jwkke5qJSpMowjUqW'
+CLIENT_ID = ""
+CLIENT_SECRET = ""
+client_access_token = ''
 
 
 def main():
