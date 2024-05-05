@@ -6,7 +6,7 @@ This project aims to conduct sentiment analysis on song lyrics to extract emotio
 
 ## Features
 
-**Sentiment Analysis:** Utilizing “Twitter-roBERTa-base for Sentiment Analysis - UPDATED (2022)” to analyze the emotional content of song lyrics.
+**Sentiment Analysis:** Utilizing “Twitter-roBERTa-base for Sentiment Analysis - UPDATED (2022)” to analyze the emotional content of song lyrics. \n
 **Genre and Time Trends:** Identifying trends in sentiment across different music genres and time periods.
 **Exploratory Data Analysis (EDA):** Conducting EDA to gain insights into the distribution of sentiment scores, word frequencies, and other relevant metrics.
 **SQL Database Integration:** Storing cleaned lyrics data and sentiment analysis results in a SQL database for efficient data management and retrieval.
