@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 import lyricsgenius as lg
 import re
 from transformers import AutoTokenizer, AutoConfig
@@ -7,10 +6,7 @@ from scipy.special import softmax
 import numpy as np
 from transformers import AutoModelForSequenceClassification
 from transformers import AutoTokenizer
-import csv
-import urllib.request
 from gensim.parsing.preprocessing import remove_stopwords
-import os
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
