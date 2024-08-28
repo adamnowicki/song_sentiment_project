@@ -18,7 +18,7 @@ This project aims to conduct sentiment analysis on song lyrics to extract emotio
 
 **Genius API Integration:** Utilizing the Genius API to fetch song lyrics based on user input and provide sentiment analysis results for the given song.  
 
-**Data Visualization:** Tableau Dashboard https://public.tableau.com/app/profile/adam.nowicki/viz/SongSentimentAnalysis/Story1  
+**Data Visualization:** Tableau Dashboard https://public.tableau.com/app/profile/adam.nowicki/viz/SongSentimentAnalysis/DashboardOverview
 
 ## Contributors
 
